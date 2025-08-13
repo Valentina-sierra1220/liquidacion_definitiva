@@ -95,7 +95,6 @@ class LiquidacionLaboralTest(unittest.TestCase):
         self.assertEqual(esperado, resultado)
         
         
-#Caso extraordinario 1
 
 #Caso extraordinario 1
 
@@ -139,7 +138,87 @@ class LiquidacionLaboralTest(unittest.TestCase):
 
         # Prueba que los resultados sean iguales
         self.assertEqual(esperado, resultado)
+
+#Caso extraordinario 3
+
+    def test_calculo_extraordinario_3(self):
+        # Datos de entrada
+        salario = 1_000_000
+        auxilio = 162_000
+        vacaciones_tomadas =  False
+        despido_sin_causa = True
+        fecha_inicio = LiquidacionLaboral.date(2025, 1, 4)
+        fecha_fin = LiquidacionLaboral.date(2025, 5, 31)
+
+        # Proceso
+        resultado = LiquidacionLaboral.calcular_total(fecha_inicio, fecha_fin ,salario ,auxilio ,vacaciones_tomadas , despido_sin_causa)
+
+        # Resultado esperado
+        esperado = 987_554
+
+        # Prueba que los resultados sean iguales
+        self.assertEqual(esperado, resultado)
         
+        
+        
+# Caso error 1
+
+    def test_error_1_intereses_no_pagos(self):
+        
+        salario = 1_200_000
+        auxilio = 162_000
+        vacaciones_tomadas = False
+        despido_sin_causa = False
+        fecha_inicio = LiquidacionLaboral.date(2025, 1, 5)
+        fecha_fin = LiquidacionLaboral.date(2025, 6, 15)
+
+        with self.assertRaises(LiquidacionLaboral.InteresesNoPagosError):
+            LiquidacionLaboral.calcular_total(fecha_inicio,fecha_fin,salario,auxilio,vacaciones_tomadas,despido_sin_causa)
+
+
+
+# Caso error 2
+    def test_error_2_intereses_no_pagos(self):
+    
+        salario = 1_250_000
+        auxilio = 162_000
+        vacaciones_tomadas = False
+        despido_sin_causa = False
+        fecha_inicio = LiquidacionLaboral.date(2025, 2, 1)
+        fecha_fin = LiquidacionLaboral.date(2025, 7, 31)
+
+        with self.assertRaises(LiquidacionLaboral.InteresesNoPagosError):
+            LiquidacionLaboral.calcular_total(fecha_inicio,fecha_fin,salario,auxilio,vacaciones_tomadas,despido_sin_causa)
+
+# Caso error 3
+    def test_error_3_intereses_no_pagos(self):
+    
+        salario = 1_150_000
+        auxilio = 162_000
+        vacaciones_tomadas = False
+        despido_sin_causa = False
+        fecha_inicio = LiquidacionLaboral.date(2025, 3, 10)
+        fecha_fin = LiquidacionLaboral.date(2025, 8, 20)
+
+        with self.assertRaises(LiquidacionLaboral.InteresesNoPagosError):
+            LiquidacionLaboral.calcular_total(fecha_inicio,fecha_fin,salario,auxilio,vacaciones_tomadas,despido_sin_causa)
+
+#Caso error 4
+    def test_error_4_intereses_no_pagos(self):
+    
+        salario = 1_100_000
+        auxilio = 162_000
+        vacaciones_tomadas = False
+        despido_sin_causa = False
+        fecha_inicio = LiquidacionLaboral.date(2025, 1, 1)
+        fecha_fin = LiquidacionLaboral.date(2025, 6, 30)
+
+    
+        with self.assertRaises(LiquidacionLaboral.InteresesNoPagosError):
+            LiquidacionLaboral.calcular_total(fecha_inicio,fecha_fin,salario,auxilio,vacaciones_tomadas,despido_sin_causa)
+    
+    
+    
         
         
         
@@ -148,3 +227,4 @@ class LiquidacionLaboralTest(unittest.TestCase):
 # Va fijo en todas las pruebas
 if __name__ == '__main__':
     unittest.main()
+
