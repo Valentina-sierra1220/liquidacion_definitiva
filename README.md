@@ -1,5 +1,4 @@
-# liquidacion_definitiva entrevista
-https://s31.aconvert.com/convert/p3r68-cdx67/3e5du-8dec2.mp3
+
 
 
 # Casos de Prueba para Liquidación Definitiva Laboral
