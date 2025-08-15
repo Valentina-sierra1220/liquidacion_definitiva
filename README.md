@@ -1,5 +1,5 @@
 
-# Realizado por Juanita Legarda Ramirez y Valentina Sierra Ospina
+# Realizado por Juanita Legarda Ramírez y Valentina Sierra Ospina
 
 
 
