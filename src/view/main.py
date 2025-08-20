@@ -1,5 +1,8 @@
+import sys
+sys.path.append("src")
+
 from datetime import datetime
-from LiquidacionLaboral import calcular_total
+from model.LiquidacionLaboral import calcular_total
 
 def pedir_fecha(mensaje):
     while True:
@@ -54,5 +57,5 @@ def main():
 
     print(f"\n💵 Total a pagar: ${total:,.0f} COP")
 
-if __name__ == "__main__ ":
+if __name__ == "__main__":
     main()

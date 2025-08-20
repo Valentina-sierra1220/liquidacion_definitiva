@@ -1,8 +1,14 @@
 {
+    "python.autoComplete.extraPaths": [
+        "src"
+    ],
+    "python.analysis.extraPaths": [
+        "src"
+    ],
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./casos_prueba1",
+        "./test",
         "-p",
         "*test*.py"
     ],
