@@ -83,7 +83,7 @@ Por ejemplo:
 
 -Navega a la carpeta del proyecto.
 
--Ejecuta las pruebas con el siguiente comando: python -m unittest test/test_liquidacion.py
+# Ejecuta las pruebas con el siguiente comando: python -m unittest test/test_liquidacion.py
 
 Esto correrá todos los casos de prueba y mostrará si los resultados esperados coinciden con los obtenidos.
 
@@ -91,7 +91,7 @@ Esto correrá todos los casos de prueba y mostrará si los resultados esperados 
 
 -Abre una terminal en la carpeta raíz del proyecto.
 
--Ejecuta el siguiente comando: python src/view/main.py
+# Ejecuta el siguiente comando: python src/view/main.py
 
 -El sistema te pedirá los siguientes datos: Fecha de inicio laboral (formato AAAA-MM-DD), Fecha de finalización, Salario mensual, Auxilio de transporte, Vacaciones tomadas (o F si no aplican), Si fue despedido sin justa causa (S/N)
 El sistema calculará y mostrará el valor total de la liquidación.
