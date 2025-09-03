@@ -1,7 +1,7 @@
 
 # Realizado por Juanita Legarda Ramírez y Valentina Sierra Ospina
 
-# USO DE LA APLICACIÓN
+#  `USO DE LA APLICACIÓN `
 
 💼 Liquidación Definitiva - Calculadora de Prestaciones Laborales en Python
 
@@ -19,7 +19,7 @@ Además, el sistema maneja errores específicos mediante excepciones personaliza
 
 El proyecto está estructurado de forma modular, siguiendo una aproximación tipo **MVC (Model - View - test)** para mantener una separación clara entre la lógica del negocio, la interfaz de usuario y las pruebas.
 
-# ESTRUCTURA 
+#  `ESTRUCTURA ` 
 
 <img width="644" height="319" alt="Capture" src="https://github.com/user-attachments/assets/11505173-51aa-4705-9171-1f70420dc73f" />
 
@@ -47,7 +47,7 @@ Calcula los siguientes componentes:
 Además, lanza la excepción personalizada `InteresesNoPagosError` en ciertos casos simulados para validar el manejo de errores en las pruebas.
 
 
-# src/view/main.py
+#  `src/view/main.py`
 
 Este archivo permite al usuario interactuar con el sistema desde la terminal. Solicita los datos necesarios, valida el formato y muestra el resultado en pesos colombianos (`COP`).
 
@@ -58,7 +58,7 @@ Inputs solicitados:
 - Si fue despedido sin justa causa (`S/N`)
   
 
-# test/test_liquidacion.py
+#  `test/test_liquidacion.py`
 
 El archivo contiene más de 10 casos de prueba que validan:
 
@@ -77,7 +77,7 @@ Por ejemplo:
 (date(2025, 1, 5), date(2025, 6, 15), 1_200_000, 162_000)
 
 
-# ¿Cómo ejecutar las pruebas unitarias?
+#  `¿Cómo ejecutar las pruebas unitarias?`
 
 -Asegúrate de tener Python 3.x instalado.
 
@@ -87,7 +87,7 @@ Por ejemplo:
 
 Esto correrá todos los casos de prueba y mostrará si los resultados esperados coinciden con los obtenidos.
 
-# ¿Cómo ejecutar la calculadora de liquidación por consola?
+#  `¿Cómo ejecutar la calculadora de liquidación por consola?`
 
 -Abre una terminal en la carpeta raíz del proyecto.
 
