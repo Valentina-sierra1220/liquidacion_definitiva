@@ -21,7 +21,8 @@ El proyecto está estructurado de forma modular, siguiendo una aproximación tip
 
 #  `ESTRUCTURA ` 
 
-<img width="644" height="319" alt="Capture" src="https://github.com/user-attachments/assets/11505173-51aa-4705-9171-1f70420dc73f" />
+
+<img width="674" height="326" alt="Capture" src="https://github.com/user-attachments/assets/d8036110-b13e-41cf-9cec-2fb6c1ab4145" />
 
 
 
