@@ -21,18 +21,7 @@ El proyecto está estructurado de forma modular, siguiendo una aproximación tip
 
 # ESTRUCTURA 
 
-liquidacion_definitiva/
-│
-├── src/
-│ ├── model/
-│ │ └── LiquidacionLaboral.py # Lógica principal de cálculo de liquidación
-│ └── view/
-│ └── main.py # Interfaz en consola para el usuario final
-│
-├── test/
-│ └── test_liquidacion.py # Pruebas unitarias usando unittest
-│
-└── README.md # Documentación del proyecto
+<img width="644" height="319" alt="Capture" src="https://github.com/user-attachments/assets/11505173-51aa-4705-9171-1f70420dc73f" />
 
 
 🔍 Descripción de Componentes
