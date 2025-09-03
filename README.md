@@ -24,7 +24,8 @@ El proyecto está estructurado de forma modular, siguiendo una aproximación tip
 <img width="644" height="319" alt="Capture" src="https://github.com/user-attachments/assets/11505173-51aa-4705-9171-1f70420dc73f" />
 
 
-🔍 Descripción de Componentes
+
+# 🔍 Descripción de Componentes
 
  # 📦 `src/model/LiquidacionLaboral.py`
 Contiene la función principal `calcular_total()`, la cual recibe como parámetros:
@@ -86,7 +87,7 @@ Por ejemplo:
 
 Esto correrá todos los casos de prueba y mostrará si los resultados esperados coinciden con los obtenidos.
 
-# Cómo ejecutar la calculadora de liquidación por consola?
+# ¿Cómo ejecutar la calculadora de liquidación por consola?
 
 -Abre una terminal en la carpeta raíz del proyecto.
 
