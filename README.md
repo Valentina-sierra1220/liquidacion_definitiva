@@ -83,7 +83,7 @@ Por ejemplo:
 
 -Navega a la carpeta del proyecto.
 
--Ejecuta las pruebas con el siguiente comando: python -m unittest test/test_liquidacion.py
+-Ejecuta las pruebas con el siguiente comando: python -m unittest test/test_LiquidacionLaboral.py
 
 Esto correrá todos los casos de prueba y mostrará si los resultados esperados coinciden con los obtenidos.
 
