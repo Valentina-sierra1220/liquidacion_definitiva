@@ -2,7 +2,7 @@
 import unittest
 
 # Las pruebas importan los módulos que hacen el trabajo
-import src.model.LiquidacionLaboral as LiquidacionLaboral
+from src.model import LiquidacionLaboral
 
 
 # Debe existir por lo menos una clase que contenga las pruebas unitarias
