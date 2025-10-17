@@ -1,0 +1,18 @@
+# Ignorar configuraciones privadas
+secret_config.py
+src/database/secret_config.py
+
+# Ignorar archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorar entorno virtual
+venv/
+env/
+
+# Ignorar archivos de base de datos locales
+*.db
+
+# Ignorar configuración local de VSCode
+.vscode/
