@@ -1,6 +1,22 @@
 
 # Realizado por Juanita Legarda Ramírez, Valentina Sierra Ospina y Francisco Gomez Gomez
 
+#  `PREREQUISITOS BASE DE DATOS`
+
+Instale el paquete psycopg2 con:
+
+pip install psycopg2
+Asegurese de tener una base de datos PostgreSQL y sus respectivos datos de acceso.
+
+Copie el archivo secretConfig.py y establezca en este archivo los datos de conexión a su base de datos.
+
+Antes de ejecutar la aplicación por primera vez, debe ejecutar las pruebas unitarias, para que vean las tablas en la base de datos.
+
+#  `Configuración de la base de datos`
+Esta aplicación requiere que este creado una tabla de llamada de usuarios.
+
+Utilice el script en sql\crear-usuarios.sql para crear antes de ejecutar la aplicación o las pruebas unitarias para que se creen las tablas necesarias.
+
 #  `USO DE LA APLICACIÓN `
 
 💼 Liquidación Definitiva - Calculadora de Prestaciones Laborales en Python
