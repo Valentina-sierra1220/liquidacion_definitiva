@@ -9,7 +9,7 @@ class LiquidacionController:
         emp = next((e for e in EmpleadoController.empleados if e["id"] == id_emp), None)
 
         if not emp:
-            print("⚠️ Empleado no encontrado.\n")
+            print(" Empleado no encontrado.\n")
             return
 
         try:

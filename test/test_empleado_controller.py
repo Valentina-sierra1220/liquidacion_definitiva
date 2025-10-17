@@ -9,7 +9,7 @@ class TestEmpleadoController(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        EmpleadoController.eliminar_tabla()
+        EmpleadoController.borrar_tabla()
         EmpleadoController.crear_tabla()
 
     def test_insertar_y_buscar_empleado_1(self):
@@ -22,8 +22,8 @@ class TestEmpleadoController(unittest.TestCase):
             vacaciones_tomadas=5,
             despido_sin_causa=True
         )
-        EmpleadoController.insertar_empleado(empleado)
-        buscado = EmpleadoController.buscar_empleado("1001")
+        EmpleadoController.insertar(empleado)
+        buscado = EmpleadoController.buscar_por_cedula("1001")
         self.assertTrue(buscado.is_equal(empleado))
 
     def test_insertar_y_buscar_empleado_2(self):
@@ -36,8 +36,8 @@ class TestEmpleadoController(unittest.TestCase):
             vacaciones_tomadas=0,
             despido_sin_causa=False
         )
-        EmpleadoController.insertar_empleado(empleado)
-        buscado = EmpleadoController.buscar_empleado("2002")
+        EmpleadoController.insertar(empleado)
+        buscado = EmpleadoController.buscar_por_cedula("2002")
         self.assertTrue(buscado.is_equal(empleado))
 
     def test_insertar_y_buscar_empleado_3(self):
@@ -50,8 +50,8 @@ class TestEmpleadoController(unittest.TestCase):
             vacaciones_tomadas=12,
             despido_sin_causa=True
         )
-        EmpleadoController.insertar_empleado(empleado)
-        buscado = EmpleadoController.buscar_empleado("3003")
+        EmpleadoController.insertar(empleado)
+        buscado = EmpleadoController.buscar_por_cedula("3003")
         self.assertTrue(buscado.is_equal(empleado))
 
 if __name__ == '__main__':
