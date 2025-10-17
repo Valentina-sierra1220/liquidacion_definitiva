@@ -14,9 +14,9 @@ Copie el archivo secret_config.py y establezca en este archivo los datos de cone
 Ejemplo del contenido (sin datos privados):
 
 DB_HOST = "localhost"
-DB_NAME = "nombre_de_tu_bd"
-DB_USER = "tu_usuario"
-DB_PASSWORD = "tu_contraseña"
+ DB_NAME = "nombre_de_tu_bd"
+ DB_USER = "tu_usuario"
+ DB_PASSWORD = "tu_contraseña"
 
 Este archivo no debe de contener datos reales cuando se suba al repositorio.
 
