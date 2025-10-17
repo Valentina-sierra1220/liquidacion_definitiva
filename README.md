@@ -26,7 +26,7 @@ Antes de ejecutar la aplicación por primera vez, debe ejecutar las pruebas unit
 
 Esta aplicación requiere que este creado una tabla de llamada usuarios.
 
-Utilice el script en SQL\crear-empleados.sql para crear antes de ejecutar la aplicación o las pruebas unitarias para que se creen las tablas necesarias.
+Utilice el script en sql\crear-empleados.sql para crear antes de ejecutar la aplicación o las pruebas unitarias para que se creen las tablas necesarias.
 
 
 
