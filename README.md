@@ -1,5 +1,5 @@
 
-# Realizado por Juanita Legarda Ramírez y Valentina Sierra Ospina
+# Realizado por Juanita Legarda Ramírez, Valentina Sierra Ospina y Francisco Gomez Gomez
 
 #  `USO DE LA APLICACIÓN `
 
