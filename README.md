@@ -6,9 +6,10 @@
 Instale el paquete psycopg2 con:
 
 pip install psycopg2
+
 Asegurese de tener una base de datos PostgreSQL y sus respectivos datos de acceso.
 
-Copie el archivo secretConfig.py y establezca en este archivo los datos de conexión a su base de datos.
+Copie el archivo secret_config.py y establezca en este archivo los datos de conexión a su base de datos.
 
 Antes de ejecutar la aplicación por primera vez, debe ejecutar las pruebas unitarias, para que vean las tablas en la base de datos.
 
