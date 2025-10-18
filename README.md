@@ -1,178 +1,190 @@
+# 💼 Liquidación Definitiva  
+### *Calculadora de Prestaciones Laborales en Python*
 
-# Realizado por Juanita Legarda Ramírez, Valentina Sierra Ospina y Francisco Gomez Gomez
+**Autores:**  
+👩‍💻 Juanita Legarda Ramírez  
+👩‍💻 Valentina Sierra Ospina  
+👨‍💻 Francisco Gómez Gómez  
 
-#  `PREREQUISITOS BASE DE DATOS`
+---
 
-Instale el paquete psycopg2 con:
+## 🧩 Prerrequisitos de Base de Datos
 
-pip install psycopg2
+Antes de comenzar, asegúrate de tener lo siguiente configurado:
 
-Asegurese de tener una base de datos PostgreSQL y sus respectivos datos de acceso (usuario, contraseña, host y nombre de base de datos).
+1. **Instala el paquete de conexión a PostgreSQL:**
+   ```bash
+   pip install psycopg2
+Prepara tu base de datos PostgreSQL, con tus datos de conexión: usuario, contraseña, host y nombre de la base de datos.
 
-Copie el archivo secret_config.py y establezca en este archivo los datos de conexión a su base de datos.
+Crea el archivo secret_config.py con la siguiente estructura (sin datos reales):
 
-Ejemplo del contenido (sin datos privados):
-
+python
+Copiar código
 DB_HOST = "localhost"
- DB_NAME = "nombre_de_tu_bd"
- DB_USER = "tu_usuario"
- DB_PASSWORD = "tu_contraseña"
+DB_NAME = "nombre_de_tu_bd"
+DB_USER = "tu_usuario"
+DB_PASSWORD = "tu_contraseña"
+⚠️ Importante: este archivo no debe contener datos reales cuando se suba al repositorio.
 
-Este archivo no debe de contener datos reales cuando se suba al repositorio.
+Ejecuta las pruebas unitarias antes de correr la aplicación por primera vez; esto creará las tablas necesarias en tu base de datos.
 
-Antes de ejecutar la aplicación por primera vez, debe ejecutar las pruebas unitarias, para que vean las tablas en la base de datos.
+🛠️ Configuración de la Base de Datos
+Esta aplicación requiere la existencia de una tabla llamada usuarios.
 
-#  `CONFIGURACIÓN DE LA BASE DE DATOS`
+Puedes crearla con el script SQL incluido en:
 
-Esta aplicación requiere que este creado una tabla de llamada usuarios.
+bash
+Copiar código
+sql/crear-empleados.sql
+Si necesitas reiniciar la base de datos, usa también:
 
-Utilice el script en sql\crear-empleados.sql para crear antes de ejecutar la aplicación o las pruebas unitarias para que se creen las tablas necesarias.
+bash
+Copiar código
+sql/borrar-empleados.sql
+💡 Las pruebas unitarias también crean y eliminan las tablas automáticamente.
 
+🧱 Arquitectura del Proyecto
+El sistema sigue el patrón MVC (Model - View - Controller), asegurando una separación clara entre la lógica de negocio, la interfaz de usuario y las pruebas.
 
+pgsql
+Copiar código
+📦 src/
+ ├── model/
+ │   └── LiquidacionLaboral.py
+ ├── view/
+ │   └── main.py
+ ├── controller/
+ │   └── empleado_controller.py
+ ├── database/
+ │   └── connection.py
+ └── test/
+     └── test_liquidacion.py
+<p align="center"> <img src="https://github.com/user-attachments/assets/d8036110-b13e-41cf-9cec-2fb6c1ab4145" width="600" alt="Estructura del proyecto"> </p>
+📘 Descripción de Componentes
+src/model/LiquidacionLaboral.py
+Contiene la función principal calcular_total(), que recibe:
 
-#  `USO DE LA APLICACIÓN `
+fecha_inicio: fecha de ingreso
 
-💼 Liquidación Definitiva - Calculadora de Prestaciones Laborales en Python
+fecha_fin: fecha de salida
 
-Este proyecto implementa una calculadora de liquidación laboral para trabajadores en Colombia, desarrollada en Python. Permite calcular el valor total a pagar a un empleado al finalizar su contrato, incluyendo conceptos como:
+salario: salario mensual
 
-- Cesantías
-- Intereses sobre cesantías
-- Prima de servicios
-- Vacaciones no disfrutadas
+auxilio: auxilio de transporte mensual
 
-Además, el sistema maneja errores específicos mediante excepciones personalizadas y cuenta con una completa suite de pruebas unitarias.
+vacaciones_tomadas: número de días de vacaciones disfrutadas
 
+despido_sin_causa: booleano (True o False)
 
-🏗️ Arquitectura del Proyecto
+Calcula:
 
-El proyecto está estructurado de forma modular, siguiendo una aproximación tipo **MVC (Model - View - test)** para mantener una separación clara entre la lógica del negocio, la interfaz de usuario y las pruebas.
+Cesantías
 
-#  `ESTRUCTURA ` 
+Intereses sobre cesantías (12% anual)
 
+Prima de servicios
 
-<img width="674" height="326" alt="Capture" src="https://github.com/user-attachments/assets/d8036110-b13e-41cf-9cec-2fb6c1ab4145" />
+Vacaciones no tomadas
 
+Lanza la excepción InteresesNoPagosError en casos simulados para validar manejo de errores.
 
+src/view/main.py
+Permite al usuario interactuar desde la terminal. Solicita datos, valida formatos y muestra resultados en pesos colombianos (COP).
 
-# 🔍 Descripción de Componentes
+Datos solicitados:
 
- # 📦 `src/model/LiquidacionLaboral.py`
-Contiene la función principal `calcular_total()`, la cual recibe como parámetros:
+Fechas (AAAA-MM-DD)
 
-- `fecha_inicio`: fecha de ingreso del trabajador
-- `fecha_fin`: fecha de salida
-- `salario`: salario mensual
-- `auxilio`: auxilio de transporte mensual
-- `vacaciones_tomadas`: número de días de vacaciones disfrutadas
-- `despido_sin_causa`: booleano que indica si fue despedido sin justa causa
+Salario y auxilio (enteros)
 
-Calcula los siguientes componentes:
+Vacaciones tomadas (o “F” si no aplica)
 
-- **Cesantías:** proporcionales al tiempo trabajado
-- **Intereses sobre cesantías:** 12% anual
-- **Prima de servicios:** proporcional al tiempo trabajado
-- **Vacaciones no tomadas:** máximo 15 días por año
+Si fue despedido sin justa causa (S/N)
 
-Además, lanza la excepción personalizada `InteresesNoPagosError` en ciertos casos simulados para validar el manejo de errores en las pruebas.
+test/test_liquidacion.py
+Incluye más de 10 casos de prueba, organizados así:
 
+✅ Casos normales
 
-#  `src/view/main.py`
+Cálculos con vacaciones/no vacaciones
 
-Este archivo permite al usuario interactuar con el sistema desde la terminal. Solicita los datos necesarios, valida el formato y muestra el resultado en pesos colombianos (`COP`).
+Distintos periodos y salarios
 
-Inputs solicitados:
-- Fechas en formato `AAAA-MM-DD`
-- Salario y auxilio como números enteros
-- Vacaciones tomadas (o `F` si no aplican)
-- Si fue despedido sin justa causa (`S/N`)
-  
+⚠️ Casos extraordinarios
 
-#  `test/test_liquidacion.py`
+Contratos prolongados
 
-El archivo contiene más de 10 casos de prueba que validan:
+Combinaciones de datos extremos
 
-#### ✅ Casos normales:
-- Cálculos con vacaciones tomadas y no tomadas
-- Periodos variados de tiempo
-- Diferentes niveles salariales
+❌ Casos de error simulados
 
-#### ⚠️ Casos extraordinarios:
-- Contratos de duración prolongada (más de un año)
-- Combinaciones extremas de entrada
+Lanza InteresesNoPagosError para validar manejo de excepciones.
 
-#### ❌ Casos con errores simulados:
-Pruebas diseñadas para lanzar la excepción `InteresesNoPagosError`
-Por ejemplo:
-(date(2025, 1, 5), date(2025, 6, 15), 1_200_000, 162_000)
+🧪 ¿Cómo ejecutar las pruebas unitarias?
+Asegúrate de tener Python 3.x instalado.
 
+Navega a la carpeta raíz del proyecto.
 
-#  `¿Cómo ejecutar las pruebas unitarias?`
+Ejecuta:
 
--Asegúrate de tener Python 3.x instalado.
+bash
+Copiar código
+python -m unittest test/test_LiquidacionLaboral.py
+Esto ejecutará todos los casos de prueba y mostrará los resultados en consola.
 
--Navega a la carpeta del proyecto.
+💻 ¿Cómo ejecutar la calculadora por consola?
+Abre una terminal en la raíz del proyecto.
 
--Ejecuta las pruebas con el siguiente comando: python -m unittest test/test_LiquidacionLaboral.py
+Ejecuta:
 
-Esto correrá todos los casos de prueba y mostrará si los resultados esperados coinciden con los obtenidos.
+bash
+Copiar código
+python src/view/main.py
+Ingresa los datos solicitados:
 
-#  `¿Cómo ejecutar la calculadora de liquidación por consola?`
+Fecha de inicio
 
--Abre una terminal en la carpeta raíz del proyecto.
+Fecha de finalización
 
-- Ejecuta el siguiente comando: python src/view/main.py
+Salario mensual
 
--El sistema te pedirá los siguientes datos: Fecha de inicio laboral (formato AAAA-MM-DD), Fecha de finalización, Salario mensual, Auxilio de transporte, Vacaciones tomadas (o F si no aplican), Si fue despedido sin justa causa (S/N)
+Auxilio de transporte
+
+Vacaciones tomadas o F
+
+Si fue despido sin causa (S/N)
+
 El sistema calculará y mostrará el valor total de la liquidación.
 
-# Casos de Prueba para Liquidación Definitiva Laboral
+🧮 Casos de Prueba: Clasificación
+Casos Normales
 
-La **liquidación definitiva laboral** es el cálculo y pago de las prestaciones sociales que un empleador debe entregar a un trabajador al finalizar un contrato. Este proceso incluye conceptos como:
+Contrato sin interrupciones
 
-* Cesantías
-* Intereses sobre cesantías
-* Prima de servicios
-* Vacaciones
-* Otros valores pendientes según la legislación laboral vigente
+Finalización por vencimiento
 
-## Objetivo del Repositorio
+Casos Extraordinarios
 
-Este repositorio proporciona una colección de **casos de prueba** diseñados para validar el correcto cálculo de la liquidación definitiva en diferentes escenarios laborales. Está orientado a desarrolladores, testers, abogados laborales y académicos que deseen verificar o implementar este tipo de cálculo en sistemas informáticos.
+Despido sin justa causa
 
-## Clasificación de Casos de Prueba
+Licencias no remuneradas
 
-Los casos están organizados en tres categorías principales:
+Indemnizaciones
 
-1. **Casos Normales**
-   Representan situaciones estándar sin novedades contractuales. Ejemplos:
+Casos con Error
 
-   * Contrato a término fijo sin interrupciones
-   * Finalización por vencimiento de contrato
+Cesantías mal calculadas
 
-2. **Casos Extraordinarios**
-   Involucran condiciones atípicas que afectan la liquidación, tales como:
+Vacaciones no liquidadas
 
-   * Despido sin justa causa
-   * Licencias no remuneradas
-   * Recargos nocturnos o dominicales
-   * Indemnizaciones
+Intereses no pagados
 
-3. **Casos con Error**
-   Simulan omisiones o errores comunes cometidos por el empleador, útiles para pruebas negativas o de validación. Ejemplos:
 
-   * Cesantías mal calculadas
-   * Ausencia de pago de intereses
-   * Vacaciones no liquidadas
 
-## Usos
 
-Estos casos de prueba pueden ser utilizados en:
 
-* **Pruebas funcionales** de software de nómina
-* **Desarrollo de aplicaciones** con cálculos legales incorporados
-* **Capacitaciones o materiales educativos** sobre legislación laboral
-* **Auditorías o verificaciones de cumplimiento normativo**
+
 
 
 
