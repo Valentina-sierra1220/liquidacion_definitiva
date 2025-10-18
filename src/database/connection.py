@@ -1,27 +1,24 @@
 import psycopg2
+from typing import Any, Dict
 from database.secret_config import DB_CONFIG
 
 def get_connection():
-    return psycopg2.connect(**DB_CONFIG)
+    """
+    Retorna una conexión psycopg2 usando DB_CONFIG.
+    Uso recomendado:
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT 1;")
+    """
+    required_keys = {"host", "dbname", "user", "password"}
+    missing = required_keys - set(DB_CONFIG.keys())
+    if missing:
+        raise KeyError(f"Faltan claves en DB_CONFIG: {', '.join(sorted(missing))}")
 
-def init_db():
-    """Este método se puede usar si deseas crear tablas desde Python (opcional)."""
-    conn = get_connection()
-    cursor = conn.cursor()
-    
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS empleados (
-        identificacion VARCHAR(20) PRIMARY KEY,
-        nombre TEXT NOT NULL,
-        cargo TEXT NOT NULL,
-        salario NUMERIC(12,2) NOT NULL,
-        fecha_ingreso DATE NOT NULL,
-        vacaciones_tomadas INTEGER NOT NULL,
-        despido_sin_causa BOOLEAN NOT NULL,
-        creado_en TIMESTAMP DEFAULT now()
-    );
-    """)
-    
-    conn.commit()
-    cursor.close()
-    conn.close()
+    return psycopg2.connect(
+        host=DB_CONFIG["host"],
+        dbname=DB_CONFIG["dbname"],
+        user=DB_CONFIG["user"],
+        password=DB_CONFIG["password"],
+        port=DB_CONFIG.get("port", 5432),
+    )

@@ -1,9 +1,12 @@
 import sys
+from database import secret_config
+
 sys.path.append("src")
 
 import psycopg2
 from model.empleado_model import Empleado
-import secret_config
+
+
 
 
 class EmpleadoController:
