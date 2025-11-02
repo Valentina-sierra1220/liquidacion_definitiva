@@ -1,42 +1,23 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block title %}Calcular Liquidación{% endblock %}
+{% block header %}Calcular Liquidación{% endblock %}
 
-</head>
-
-<body>
-    <form action="/liquidacion/new">
-        <div>
-            Nombre: <input type="text" name="nombre" />
-        </div>
-        <div>
-            Apellido: <input type="text" name="apellido" />
-        </div>
-        <div>
-            Fecha de ingreso: <input type="date" name="fecha_ingreso" />
-        </div>
-        <div>
-            Fecha de retiro: <input type="date" name="fecha_retiro" />
-        </div>
-        <div>
-            Salario mensual: <input type="number" name="salario" step="0.01" />
-        </div>
-        <div>
-            Días de vacaciones pendientes: <input type="number" name="dias_vacaciones" />
-        </div>
-        <div>
-            Tipo de contrato:
-            <select name="tipo_contrato">
-                <option value="fijo">Fijo</option>
-                <option value="indefinido">Indefinido</option>
-                <option value="obra_labor">Obra o labor</option>
-            </select>
-        </div>
-        <input type="submit" value="Calcular Liquidación" />
-    </form>
-</body>
-
-</html>
-
-# insertar, buscar, crear una tabla, crear borrar
+{% block content %}
+<form action="/liquidacion/calcular" method="POST">
+    <div>Nombre: <input type="text" name="nombre" /></div>
+    <div>Apellido: <input type="text" name="apellido" /></div>
+    <div>Fecha de ingreso: <input type="date" name="fecha_ingreso" /></div>
+    <div>Fecha de retiro: <input type="date" name="fecha_retiro" /></div>
+    <div>Salario mensual: <input type="number" name="salario" step="0.01" /></div>
+    <div>Días de vacaciones pendientes: <input type="number" name="dias_vacaciones" /></div>
+    <div>Tipo de contrato:
+        <select name="tipo_contrato">
+            <option value="fijo">Fijo</option>
+            <option value="indefinido">Indefinido</option>
+            <option value="obra_labor">Obra o labor</option>
+        </select>
+    </div>
+    <input type="submit" value="Calcular Liquidación" />
+</form>
+{% endblock %}

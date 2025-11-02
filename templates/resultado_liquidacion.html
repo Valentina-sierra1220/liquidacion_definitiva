@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Resultado de Liquidación{% endblock %}
+{% block header %}Resultado de Liquidación{% endblock %}
+
+{% block content %}
+    <p><b>Empleado:</b> {{ r.empleado }}</p>
+    <p><b>Cargo:</b> {{ r.cargo }}</p>
+    <p><b>Salario:</b> {{ r.salario }}</p>
+    <p><b>Fecha inicio:</b> {{ r.fecha_inicio }}</p>
+    <p><b>Fecha fin:</b> {{ r.fecha_fin }}</p>
+    <p><b>Vacaciones tomadas:</b> {{ r.vacaciones_tomadas }}</p>
+    <p><b>Total liquidación:</b> {{ r.total_liquidacion }}</p>
+{% endblock %}
