@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Liquidación Definitiva{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <ul>
+            <li><a href="{{ url_for('menu') }}">🏠 Inicio</a></li>
+            <li><a href="{{ url_for('nuevo_empleado') }}">➕ Registrar Empleado</a></li>
+            <li><a href="{{ url_for('buscar_empleado') }}">🔍 Buscar Empleado</a></li>
+            <li><a href="{{ url_for('formulario_liquidacion') }}">💰 Calcular Liquidación</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>{% block header %}{% endblock %}</h1>
+        </header>
+        <section>
+            {% block content %}{% endblock %}
+        </section>
+    </div>
+</body>
+</html>

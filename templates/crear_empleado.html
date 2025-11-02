@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar Empleado{% endblock %}
+{% block header %}Registrar Nuevo Empleado{% endblock %}
+
+{% block content %}
+<form action="/empleado/guardar" method="POST">
+    <div><label>Identificación:</label> <input type="text" name="identificacion" required></div>
+    <div><label>Nombre:</label> <input type="text" name="nombre" required></div>
+    <div><label>Cargo:</label> <input type="text" name="cargo" required></div>
+    <div><label>Salario:</label> <input type="number" name="salario" required></div>
+    <div><label>Fecha de ingreso:</label> <input type="date" name="fecha_ingreso" required></div>
+    <div><label>Vacaciones tomadas:</label> <input type="number" name="vacaciones_tomadas" value="0"></div>
+    <div><label>¿Despido sin causa?</label>
+        <select name="despido_sin_causa">
+            <option value="false">No</option>
+            <option value="true">Sí</option>
+        </select>
+    </div>
+    <input type="submit" value="Guardar Empleado">
+</form>
+{% endblock %}

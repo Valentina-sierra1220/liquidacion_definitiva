@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Buscar Empleado{% endblock %}
+{% block header %}Buscar Empleado{% endblock %}
+
+{% block content %}
+<form action="/empleado/resultado" method="POST">
+    <div><label>Cédula:</label> <input type="text" name="identificacion" required></div>
+    <input type="submit" value="Buscar">
+</form>
+{% endblock %}
