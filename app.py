@@ -1,6 +1,3 @@
-# -----------------------------------------------
-# Aplicación Web Flask: Liquidación Definitiva
-# -----------------------------------------------
 
 from flask import Flask, render_template, request
 from datetime import datetime
@@ -14,17 +11,11 @@ from src.model.empleado_model import Empleado
 app = Flask(__name__)
 
 
-# ----------------------------
-# RUTA PRINCIPAL (MENÚ)
-# ----------------------------
 @app.route('/')
 def menu():
     return render_template('menu.html')
 
 
-# ----------------------------
-# FORMULARIO: CREAR EMPLEADO
-# ----------------------------
 @app.route('/empleado/nuevo')
 def nuevo_empleado():
     return render_template('crear_empleado.html')
@@ -50,9 +41,6 @@ def guardar_empleado():
         return f" Error al guardar empleado: {str(e)}"
 
 
-# ----------------------------
-# FORMULARIO: BUSCAR EMPLEADO
-# ----------------------------
 @app.route('/empleado/buscar')
 def buscar_empleado():
     return render_template('buscar_empleado.html')
@@ -76,9 +64,6 @@ def resultado_busqueda():
     """
 
 
-# ----------------------------
-# FORMULARIO: CALCULAR LIQUIDACIÓN
-# ----------------------------
 @app.route('/liquidacion/form')
 def formulario_liquidacion():
     """Muestra el formulario de liquidación (tu antiguo formularios.py adaptado)."""
@@ -103,8 +88,5 @@ def calcular_liquidacion():
         return f" Error al calcular la liquidación: {str(e)}"
 
 
-# ----------------------------
-# MAIN
-# ----------------------------
 if __name__ == '__main__':
     app.run(debug=True)
