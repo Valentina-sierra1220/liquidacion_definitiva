@@ -1,5 +1,5 @@
 # 💼 Liquidación Definitiva  
-### *Calculadora de Prestaciones Laborales en Python*
+### Calculadora de Prestaciones Laborales en Python + Flask + PostgreSQL  
 
 **Autores:**  
 👩‍💻 Juanita Legarda Ramírez  
@@ -8,61 +8,102 @@
 
 ---
 
-## 🧩 Prerrequisitos de Base de Datos
+## 🧩 Prerrequisitos de Base de Datos  
 
 Antes de comenzar, asegúrate de tener lo siguiente configurado:
 
-1. **Instala el paquete de conexión a PostgreSQL:**
+1. **Instala los paquetes necesarios:**  
    ```bash
-   pip install psycopg2
+   pip install flask psycopg2
+
 Prepara tu base de datos PostgreSQL, con tus datos de conexión: usuario, contraseña, host y nombre de la base de datos.
 
 Crea el archivo secret_config.py con la siguiente estructura (sin datos reales):
 
-python
-Copiar código
-DB_HOST = "localhost"
-DB_NAME = "nombre_de_tu_bd"
-DB_USER = "tu_usuario"
-DB_PASSWORD = "tu_contraseña"
+PGHOST = "localhost"
+PGDATABASE = "nombre_de_tu_bd"
+PGUSER = "tu_usuario"
+PGPASSWORD = "tu_contraseña"
+PGPORT = "5432"
+
+
 ⚠️ Importante: este archivo no debe contener datos reales cuando se suba al repositorio.
 
 Ejecuta las pruebas unitarias antes de correr la aplicación por primera vez; esto creará las tablas necesarias en tu base de datos.
 
+
+
+
 🛠️ Configuración de la Base de Datos
-Esta aplicación requiere la existencia de una tabla llamada usuarios.
+
+Esta aplicación requiere la existencia de una tabla llamada empleados.
 
 Puedes crearla con el script SQL incluido en:
 
-bash
-Copiar código
 sql/crear-empleados.sql
+
+
 Si necesitas reiniciar la base de datos, usa también:
 
-bash
-Copiar código
 sql/borrar-empleados.sql
+
+
 💡 Las pruebas unitarias también crean y eliminan las tablas automáticamente.
 
+
+
+
 🧱 Arquitectura del Proyecto
+
 El sistema sigue el patrón MVC (Model - View - Controller), asegurando una separación clara entre la lógica de negocio, la interfaz de usuario y las pruebas.
 
-pgsql
-Copiar código
-📦 src/
- ├── model/
- │   └── LiquidacionLaboral.py
- ├── view/
- │   └── main.py
- ├── controller/
- │   └── empleado_controller.py
- ├── database/
- │   └── connection.py
- └── test/
-     └── test_liquidacion.py
-<p align="center"> <img src="https://github.com/user-attachments/assets/d8036110-b13e-41cf-9cec-2fb6c1ab4145" width="600" alt="Estructura del proyecto"> </p>
+
+
+
+📦 LIQUIDACION_DEFINITIVA/
+│
+├── app.py                       # Punto de entrada principal de la aplicación Flask
+│
+├── src/
+│   ├── model/
+│   │   ├── LiquidacionLaboral.py
+│   │   └── empleado_model.py
+│   │
+│   ├── controller/
+│   │   ├── empleado_controller.py
+│   │   └── liquidacion_controller.py
+│   │
+│   ├── database/
+│   │   └── secret_config.py
+│
+├── templates/                   # Interfaz HTML (vistas)
+│   ├── base.html
+│   ├── menu.html
+│   ├── crear_empleado.html
+│   ├── buscar_empleado.html
+│   ├── formularios.html
+│   └── resultado_liquidacion.html
+│
+├── static/                      # Archivos estáticos (CSS)
+│   └── css/
+│       └── style.css
+│
+├── sql/
+│   ├── crear-empleados.sql
+│   └── borrar-empleados.sql
+│
+└── test/
+    └── test_empleado_controller.py
+
+
+
+
+
+
+
 📘 Descripción de Componentes
-src/model/LiquidacionLaboral.py
+📗 src/model/LiquidacionLaboral.py
+
 Contiene la función principal calcular_total(), que recibe:
 
 fecha_inicio: fecha de ingreso
@@ -87,84 +128,113 @@ Prima de servicios
 
 Vacaciones no tomadas
 
-Lanza la excepción InteresesNoPagosError en casos simulados para validar manejo de errores.
+Lanza la excepción InteresesNoPagosError en casos simulados para validar el manejo de errores.
 
-src/view/main.py
-Permite al usuario interactuar desde la terminal. Solicita datos, valida formatos y muestra resultados en pesos colombianos (COP).
+📘 src/model/empleado_model.py
 
-Datos solicitados:
+Define la clase Empleado con los siguientes atributos:
 
-Fechas (AAAA-MM-DD)
+identificacion, nombre, cargo, salario, fecha_ingreso, vacaciones_tomadas, despido_sin_causa
 
-Salario y auxilio (enteros)
+Incluye el método is_equal() para comparar empleados y verificar su igualdad.
 
-Vacaciones tomadas (o “F” si no aplica)
+📘 src/controller/empleado_controller.py
 
-Si fue despedido sin justa causa (S/N)
+Controla la interacción con la base de datos PostgreSQL.
 
-test/test_liquidacion.py
-Incluye más de 10 casos de prueba, organizados así:
+Funciones principales:
 
-✅ Casos normales
+crear_tabla() y borrar_tabla() → Ejecutan scripts SQL.
 
-Cálculos con vacaciones/no vacaciones
+insertar(Empleado) → Inserta un nuevo registro.
 
-Distintos periodos y salarios
+buscar_por_cedula(identificacion) → Busca empleados por cédula.
 
-⚠️ Casos extraordinarios
+📘 src/controller/liquidacion_controller.py
 
-Contratos prolongados
+Se encarga de calcular la liquidación total de un empleado, tomando sus datos desde la base de datos y utilizando la función calcular_total() del modelo LiquidacionLaboral.py.
 
-Combinaciones de datos extremos
+Devuelve un diccionario con los resultados:
 
-❌ Casos de error simulados
+Nombre
 
-Lanza InteresesNoPagosError para validar manejo de excepciones.
+Cargo
+
+Salario
+
+Fecha de ingreso y retiro
+
+Vacaciones tomadas
+
+Total liquidación
+
+📘 app.py
+
+Archivo principal de la aplicación Flask.
+Define las rutas del sistema web:
+
+<img width="650" height="339" alt="image" src="https://github.com/user-attachments/assets/aee50d59-3e43-4cd3-993f-029c6e6d1be9" />
+
+
+💻 Interfaz Web
+
+La aplicación cuenta con una interfaz desarrollada en HTML y CSS (Jinja2), inspirada en el estilo del proyecto creditcard-web
+.
+
+🧭 Menú lateral:
+
+🏠 Inicio
+
+➕ Registrar Empleado
+
+🔍 Buscar Empleado
+
+💰 Calcular Liquidación
+
+🧾 Formularios:
+
+Registrar Empleado: almacena empleados en la base de datos.
+
+Buscar Empleado: consulta información existente.
+
+Calcular Liquidación: realiza los cálculos según la información ingresada.
 
 🧪 ¿Cómo ejecutar las pruebas unitarias?
+
 Asegúrate de tener Python 3.x instalado.
+Navega a la carpeta raíz del proyecto y ejecuta:
 
-Navega a la carpeta raíz del proyecto.
+python -m unittest test/test_empleado_controller.py
 
-Ejecuta:
 
-bash
-Copiar código
-python -m unittest test/test_LiquidacionLaboral.py
-Esto ejecutará todos los casos de prueba y mostrará los resultados en consola.
+Estas pruebas:
 
-💻 ¿Cómo ejecutar la calculadora por consola?
-Abre una terminal en la raíz del proyecto.
+Crean y eliminan automáticamente la tabla empleados.
 
-Ejecuta:
+Insertan registros de ejemplo.
 
-bash
-Copiar código
-python src/view/main.py
-Ingresa los datos solicitados:
+Validan la inserción y búsqueda en la base de datos.
 
-Fecha de inicio
+💻 ¿Cómo ejecutar la aplicación web?
 
-Fecha de finalización
+Abre una terminal en la raíz del proyecto y ejecuta:
 
-Salario mensual
+python app.py
 
-Auxilio de transporte
 
-Vacaciones tomadas o F
-
-Si fue despido sin causa (S/N)
-
-El sistema calculará y mostrará el valor total de la liquidación.
+Luego, abre el navegador en:
+👉 http://127.0.0.1:5000
 
 🧮 Casos de Prueba: Clasificación
-Casos Normales
+✅ Casos Normales
 
 Contrato sin interrupciones
 
 Finalización por vencimiento
 
-Casos Extraordinarios
+Cálculos con vacaciones tomadas y sin vacaciones
+
+⚙️ Casos Extraordinarios
 
 Despido sin justa causa
 
@@ -172,19 +242,13 @@ Licencias no remuneradas
 
 Indemnizaciones
 
-Casos con Error
+❌ Casos con Error
 
 Cesantías mal calculadas
 
 Vacaciones no liquidadas
 
 Intereses no pagados
-
-
-
-
-
-
 
 
 
