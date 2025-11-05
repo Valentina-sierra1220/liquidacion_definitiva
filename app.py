@@ -7,8 +7,8 @@ from flask import render_template, request
 import sys
 sys.path.append( "src" )
 
-from src.model.tarjeta import Tarjeta
-from src.controller.tarjetas_controller import TarjetasController
+from model.tarjeta import Tarjeta
+from controller.tarjetas_controller import TarjetasController
 
 
 # Flask constructor: crea una variable que nos servirá para comunicarle a Flask
