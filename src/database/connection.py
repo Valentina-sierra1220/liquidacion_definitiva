@@ -1,6 +1,6 @@
 import psycopg2
 from typing import Any, Dict
-from database.secret_config import DB_CONFIG
+import secret_config import DB_CONFIG
 
 def get_connection():
     """
