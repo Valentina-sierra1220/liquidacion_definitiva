@@ -1,5 +1,5 @@
 import sys
-from database import secret_config
+from src.database import secret_config
 
 sys.path.append("src")
 
